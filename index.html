@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ElGio_Kitchen</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="website icon" type="JPG" href="logo fix.jpg">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3 { font-family: 'Pacifico', cursive; }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-pink-50 to-pink-100 text-gray-800 relative">
+
+
+  <!-- Sidebar Tabsbar -->
+  <aside class="fixed top-28 left-0 w-40 p-4 space-y-4 bg-white rounded-r-3xl shadow z-40">
+    <h3 class="text-amber-800 font-bold text-lg mb-2">Menu</h3>
+    <a href="#brownies" class="block text-amber-800 hover:text-amber-600">Brownies</a>
+    <a href="#NastarSagu" class="block text-amber-800 hover:text-amber-600">Nastar Sagu</a>
+    <a href="#SoftCookies" class="block text-amber-800 hover:text-amber-600">Soft Cookies</a>
+  </aside>
+
+  <!-- Keranjang Button -->
+  <button id="cartBtn" class="fixed top-5 right-5 bg-white text-amber-900 px-4 py-2 rounded-full shadow hover:bg-amber-600 z-50">🛒 Keranjang (<span id="cartCount">0</span>)</button>
+
+  <!-- Sidebar Keranjang -->
+  <div id="cartSidebar" class="fixed right-0 top-0 w-96 h-full bg-white shadow-2xl transform translate-x-full transition-transform z-40 p-6 overflow-y-auto">
+    <h2 class="text-xl font-bold mb-4">Keranjang Belanja</h2>
+    <ul id="cartItems" class="space-y-2"></ul>
+    <div class="mt-4">
+      <label class="block mb-1 font-semibold">Kode Promo:</label>
+      <input id="promoCode" type="text" class="w-full px-3 py-2 border rounded" placeholder="Masukkan kode">
+      <button onclick="applyPromo()" class="mt-2 bg-amber-800 text-white px-4 py-1 rounded hover:bg-amber-600">Gunakan</button>
+      <p id="promoMessage" class="text-sm text-green-600 mt-1"></p>
+    </div>
+    <p class="mt-4 font-semibold">Total: <span id="cartTotal">Rp0</span></p>
+    
+    <!-- Checkout Form -->
+    <form id="checkoutForm" onsubmit="return submitOrder(event)" class="mt-4 space-y-3">
+      <input type="text" id="namaPembeli" placeholder="Nama Anda" class="w-full px-3 py-2 border rounded" required>
+      <input type="text" id="alamatPembeli" placeholder="Alamat Lengkap" class="w-full px-3 py-2 border rounded" required>
+      <input type="tel" id="waPembeli" placeholder="Nomor WhatsApp" class="w-full px-3 py-2 border rounded" required>
+      <button type="submit" class="bg-amber-800 text-white w-full py-2 rounded hover:bg-amber-600">Kirim Pesanan</button>
+    </form>
+
+    <button onclick="toggleCart()" class="text-sm mt-4 underline text-amber-500">Tutup</button>
+  </div>
+
+  <!-- Header -->
+  <header class="text-center py-6 bg-amber-800 text-white shadow-md flex flex-col items-center">
+    <img src="logo fix.jpg" alt="Logo Brownies" class="w-20 h-20 mb-2">
+    <h1 class="text-3xl font-bold">🍫 ElGio Kitchen 🍫</h1>
+    <p class="text-lg">Manis, Lembut, & Bikin Nagih!</p>
+    <p class="text-lg">ElGio Kitchen adalah ruang manis yang kami ciptakan untuk berbagi rasa.</p> 
+      <p>chewy, cookies lembut, dan kue kering sagu yang kami buat dengan ketulusan,</p>  
+      <P>sentuhan homemade penuh cinta, dan kenyamanan dalam setiap gigitan.</P> 
+      <p>kami percaya bahwa setiap kue memiliki cerita. </p>
+      <p>Oleh karena itu, kami berkomitmen untuk menghadirkan rasa, tampilan, dan pelayanan terbaik</p> 
+      <p>demi menyempurnakan setiap momen spesial Anda.</p>
+
+      <p>Siap mencicipi kebahagiaan kecil hari ini?</p>
+  </header>
+  <!-- Produk -->
+  <section id="produk" class="py-14">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-pacifico text-center mb-10 text-amber-800">ElGio Kitchen</h2>
+      
+      <div id="brownies" class="mb-12">
+        <h3 class="text-2xl font-bold text-amber-800 mb-6">Brownies</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <div id="brownies" class="bg-white p-6 rounded-3xl shadow-xl hover:scale-105 transition-transform">
+          <img src="brownies2010.jpg" alt=" Fudgy Brownies" class="rounded-2xl mb-4 w-full h-48 object-cover">
+          <h3 class="text-2xl text-amber-800 font-bold">Fudgy Brownies (20x20)</h3>
+          <p class="text-sm mb-2">Bukan sekadar brownies biasa, ini adalah pelukan manis dalam setiap potongan dengan toping berbeda, 
+            rasa lembut dan lumer di mulut.</p>
+          <p class="text-lg font-semibold text-green-600 mb-4">Rp150.000</p>
+          <button onclick="addToCart('Fudgy Brownies', 150000)" class="bg-amber-800 text-white px-5 py-2 rounded-full hover:bg-amber-600 transition">Tambah ke Keranjang</button>
+        </div>
+        <div id="brownies" class="bg-white p-6 rounded-3xl shadow-xl hover:scale-105 transition-transform">
+          <img src="brownies10.jpg" alt="Fudgy Brownies" class="rounded-2xl mb-4 w-full h-48 object-cover">
+          <h3 class="text-2xl text-amber-800 font-bold">Fudgy Brownies (20x10)</h3>
+          <p class="text-sm mb-2">Manis nya tidak berlebihan, tapi mampu manisin hari kamu dengan kelembutan dan toping yang melimpah.</p>
+          <p class="text-lg font-semibold text-green-600 mb-4">Rp80.000</p>
+          <button onclick="addToCart('Fudgy Brownies', 80000)" class="bg-amber-800 text-white px-5 py-2 rounded-full hover:bg-amber-600 transition">Tambah ke Keranjang</button>
+        </div>
+
+         <div id="brownies" class="bg-white p-6 rounded-3xl shadow-xl hover:scale-105 transition-transform">
+          <img src="brownies20.jpg" alt="Fudgy Brownies" class="rounded-2xl mb-4 w-full h-48 object-cover">
+          <h3 class="text-2xl text-amber-800 font-bold">Fudgy Brownies ala Pizza</h3>
+          <p class="text-sm mb-2">Bosan dengan bentuk brownies yang itu-itu aja?
+            Cobain fudgy brownies versi Pizza. Chewy luar dalam, toping berbeda di setiap potongan dan rasanya bikin nagih.</p>
+          <p class="text-lg font-semibold text-green-600 mb-4">Rp150.000</p>
+          <button onclick="addToCart('Fudgy Brownies', 150000)" class="bg-amber-800 text-white px-5 py-2 rounded-full hover:bg-amber-600 transition">Tambah ke Keranjang</button>
+        </div>
+        
+      <div id="brownies" class="bg-white p-6 rounded-3xl shadow-xl hover:scale-105 transition-transform">
+          <img src="Brownies Cookies.jpg" alt="Brownies Cookies" class="rounded-2xl mb-4 w-full h-48 object-cover">
+          <h3 class="text-2xl text-amber-800 font-bold">Brownie Cookies</h3>
+          <p class="text-sm mb-2">Cookies? Brownies? Kenapa nggak dua-duanya?
+            Brownie Cookies dari ElGio: crunchy di luar, chewy di dalam, cinta di tiap gigitan.</p>
+          <p class="text-lg font-semibold text-green-600 mb-4">Rp35.000</p>
+          <button onclick="addToCart('Brownies Cookies', 35000)" class="bg-amber-800 text-white px-5 py-2 rounded-full hover:bg-amber-600 transition">Tambah ke Keranjang</button>
+        </div>
+        </div>
+      </div>
+
+      <div id="NastarSagu" class="mb-12">
+        <h3 class="text-2xl font-bold text-amber-800 mb-6">Nastar Sagu</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <div id="NastarSagu" class="bg-white p-6 rounded-3xl shadow-xl hover:scale-105 transition-transform">
+          <img src="Nastar sagu.jpg" alt="Nastar Sagu" class="rounded-2xl mb-4 w-full h-48 object-cover">
+          <h3 class="text-2xl text-amber-800 font-bold">Nastar Sagu</h3>
+          <p class="text-sm mb-2">Kue Tradisional dengan sentuhan elegan. Nastar sagu kami hadir dengan rasa nanas autentik yang manis, 
+            sensasi sagu yang ringan dan Lumer lembut di mulut dalam sekali gigitan.</p>
+          <p class="text-lg font-semibold text-green-600 mb-4">Rp95.000</p>
+          <button onclick="addToCart('Nastar Sagu', 95000)" class="bg-amber-800 text-white px-5 py-2 rounded-full hover:bg-amber-600 transition">Tambah ke Keranjang</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="SoftCookies" class="mb-12">
+      <h3 class="text-2xl font-bold text-amber-800 mb-6">Soft Cookies</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div id="SoftCookies" class="bg-white p-6 rounded-3xl shadow-xl hover:scale-105 transition-transform">
+        <img src="Classic choco.jpg" alt="Classic choco" class="rounded-2xl mb-4 w-full h-48 object-cover">
+        <h3 class="text-2xl text-amber-800 font-bold">Classic choco</h3>
+        <p class="text-sm mb-2">perpaduan sempurna antara kelembutan tekstur dan rasa cokelat yang kaya. Dibuat dari bahan pilihan, 
+          setiap gigitannya membawa sensasi manis yang pas dan aroma cokelat yang menggoda.</p>
+        <p class="text-lg font-semibold text-green-600 mb-4">Rp10.000</p>
+        <button onclick="addToCart('Classic choco', 10000)" class="bg-amber-800 text-white px-5 py-2 rounded-full hover:bg-amber-600 transition">Tambah ke Keranjang</button>
+      </div>
+      <div id="SoftCookies" class="bg-white p-6 rounded-3xl shadow-xl hover:scale-105 transition-transform">
+        <img src="Double choco.jpg" alt="Double choco" class="rounded-2xl mb-4 w-full h-48 object-cover">
+        <h3 class="text-2xl text-amber-800 font-bold">Double choco</h3>
+        <p class="text-sm mb-2">Untuk pecinta cokelat sejati, Double Choco dari Elgio Kitchan hadir dengan sensasi ekstra. 
+          Cookies lembut dengan lapisan cokelat ganda yang meleleh di mulut—intens, kaya rasa, dan tak terlupakan.</p>
+        <p class="text-lg font-semibold text-green-600 mb-4">Rp10.000</p>
+        <button onclick="addToCart('Double choco', 10000)" class="bg-amber-800 text-white px-5 py-2 rounded-full hover:bg-amber-600 transition">Tambah ke Keranjang</button>
+      </div>
+      <div id="SoftCookies" class="bg-white p-6 rounded-3xl shadow-xl hover:scale-105 transition-transform">
+        <img src="Marshchoco.jpg" alt="Marshchoco" class="rounded-2xl mb-4 w-full h-48 object-cover">
+        <h3 class="text-2xl text-amber-800 font-bold">Marshchoco</h3>
+        <p class="text-sm mb-2">Marshchoco adalah perpaduan unik antara Cookies cokelat lembut dan topping marshmallow yang 
+          meleleh di setiap gigitannya. Manis, creamy, dan bikin nagih—sebuah sensasi baru yang tak biasa dari Elgio Kitchan.</p>
+        <p class="text-lg font-semibold text-green-600 mb-4">Rp10.000</p>
+        <button onclick="addToCart('Marshchoco', 10000)" class="bg-amber-800 text-white px-5 py-2 rounded-full hover:bg-amber-600 transition">Tambah ke Keranjang</button>
+      </div>
+      <div id="SoftCookies" class="bg-white p-6 rounded-3xl shadow-xl hover:scale-105 transition-transform">
+        <img src="Red choco cheese.jpg" alt="Red choco cheese" class="rounded-2xl mb-4 w-full h-48 object-cover">
+        <h3 class="text-2xl text-amber-800 font-bold">Red choco cheese</h3>
+        <p class="text-sm mb-2">Nikmati sensasi renyah, manis, dan gurih dalam setiap gigitan Red Choco Cheese — perpaduan 
+          sempurna cokelat lezat dan keju creamy dengan aroma red velvet yang bikin ketagihan!</p>
+        <p class="text-lg font-semibold text-green-600 mb-4">Rp10.000</p>
+        <button onclick="addToCart('Red choco cheese', 10000)" class="bg-amber-800 text-white px-5 py-2 rounded-full hover:bg-amber-600 transition">Tambah ke Keranjang</button>
+      </div>
+      <div id="SoftCookies" class="bg-white p-6 rounded-3xl shadow-xl hover:scale-105 transition-transform">
+        <img src="Monster Cookies.jpg" alt="Monster Cookies" class="rounded-2xl mb-4 w-full h-48 object-cover">
+        <h3 class="text-2xl text-amber-800 font-bold"> Monster Cookies</h3>
+        <p class="text-sm mb-2">Ukuran besar, rasa luar biasa! Monster Cookies dari Elgio Kitchan hadir dengan 
+          tekstur renyah di luar dan isi yang lembut penuh kejutan cokelat di dalam. Setiap gigitan penuh kenikmatan—manis, gurih, dan bikin
+           susah berhenti.</p>
+        <p class="text-lg font-semibold text-green-600 mb-4">Rp20.000</p>
+        <button onclick="addToCart('Monster Cookies', 20000)" class="bg-amber-800 text-white px-5 py-2 rounded-full hover:bg-amber-600 transition">Tambah ke Keranjang</button>
+      </div>
+    </div>
+  </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-amber-800 py-8 mt-12 text-center">
+    <p class="text-sm text-light-800">&copy; 2025 elgio_kitchen. All rights reserved.</p>
+    <p class="text-sm text-light-700">Instagram: <a href="https://www.instagram.com/elgio_kitchen?igsh=bWJtdnl0OHNoaWNh" class="underline">@elgio_kitchen</a> | WhatsApp: <a href="https://wa.me/6281332325655" class="underline">+62 813-3232-5655</a></p>
+  </footer>
+
+  <script>
+    const cart = [];
+    let promoValue = 0;
+
+    function addToCart(name, price) {
+      const found = cart.find(item => item.name === name);
+      if (found) {
+        found.qty += 1;
+      } else {
+        cart.push({ name, price, qty: 1 });
+      }
+      updateCart();
+    }
+
+    function changeQty(index, amount) {
+      cart[index].qty += amount;
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+      updateCart();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+
+    function applyPromo() {
+      const code = document.getElementById('promoCode').value.trim().toLowerCase();
+      const promoMessage = document.getElementById('promoMessage');
+
+      if (code === 'diskon10') {
+        promoValue = 0.1;
+        promoMessage.textContent = 'Kode berhasil digunakan! Diskon 10%.';
+      } else {
+        promoValue = 0;
+        promoMessage.textContent = 'Kode tidak valid.';
+      }
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartCount = document.getElementById('cartCount');
+      const cartItems = document.getElementById('cartItems');
+      const cartTotal = document.getElementById('cartTotal');
+
+      let totalItems = 0;
+      cartItems.innerHTML = '';
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        total += item.price * item.qty;
+        totalItems += item.qty;
+
+        const li = document.createElement('li');
+        li.className = "bg-amber-50 px-3 py-2 rounded shadow";
+        li.innerHTML = `
+          <div class="flex justify-between items-center">
+            <div>
+              <strong>${item.name}</strong><br>
+              <span class='text-sm'>Rp${item.price.toLocaleString()} x ${item.qty}</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <button onclick="changeQty(${index}, -1)" class="text-white bg-amber-400 rounded-full px-2">-</button>
+              <span class="mx-1">${item.qty}</span>
+              <button onclick="changeQty(${index}, 1)" class="text-white bg-amber-400 rounded-full px-2">+</button>
+              <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700 text-sm ml-2">Hapus</button>
+            </div>
+          </div>`;
+        cartItems.appendChild(li);
+      });
+
+      const discount = Math.floor(total * promoValue);
+      const finalTotal = total - discount;
+
+      cartTotal.textContent = `Rp${finalTotal.toLocaleString()}${promoValue > 0 ? ' (Diskon Rp' + discount.toLocaleString() + ')' : ''}`;
+      cartCount.textContent = totalItems;
+    }
+
+    function toggleCart() {
+      const sidebar = document.getElementById('cartSidebar');
+      sidebar.classList.toggle('translate-x-full');
+    }
+
+    function submitOrder(e) {
+      e.preventDefault();
+      const nama = document.getElementById('namaPembeli').value;
+      const alamat = document.getElementById('alamatPembeli').value;
+      const wa = document.getElementById('waPembeli').value;
+      let pesan = `Halo, saya mau pesan:\nNama: ${nama}\nAlamat: ${alamat}\nNomor: ${wa}\nPesanan:\n`;
+
+      cart.forEach((item, i) => {
+        pesan += `${i + 1}. ${item.name} x${item.qty} - Rp${(item.qty * item.price).toLocaleString()}\n`;
+      });
+
+      const total = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
+      const discount = Math.floor(total * promoValue);
+      const finalTotal = total - discount;
+      pesan += `Total: Rp${finalTotal.toLocaleString()}${promoValue > 0 ? ' (Diskon Rp' + discount.toLocaleString() + ')' : ''}`;
+
+      const encoded = encodeURIComponent(pesan);
+      window.open(`https://wa.me/6281332325655?text=${encoded}`, '_blank');
+      return false;
+    }
+
+    document.getElementById('cartBtn').addEventListener('click', toggleCart);
+  </script>
+</body>
+</html>
